@@ -1,0 +1,74 @@
+<h1>this is the about page</h1>
+{{! weixin:'<b>13410248376</b>' 使用三重大括号关闭HTML转义的功能 (这段是handlebars的注释)}}
+<p>weixin:{{{weixin}}}</p>
+{{! 在视图中包含一个局部文件,express会从views/partials文件夹中找 weather.handlebars 文件}}
+{{> weather}}
+{{! 在视图中包含一个局部文件}}
+{{#each partials.weather}}
+<p>
+	{{location}}-{{temp}}
+</p>
+{{/each}}
+<button id="getJson" class="btn btn-success">Get json data</button>
+<div>
+	<form action="/process" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="hush" value="hidden, but not secret!">
+		<div>
+			<label for="fieldbook">你最喜欢的书的书名: </label>
+			<input type="text" id="fieldbook" name="book" class="form-control col-md-3">
+		</div>
+		<div>
+			<label>请选择你喜欢的书</label>
+			<input type="file" class="btn btn-primary">
+		</div>
+		<div>
+			<button type="submit" class="btn btn-primary">提交</button>
+		</div>
+	</form>
+</div>
+<!-- 现在让我们将上下文对象传递到如下模板： -->
+<div>
+	<ul>
+		{{#each tourss.tours}}
+		{{! I'm in a new block...and the context has changed }}
+		<li>
+			{{name}} - {{price}}
+			{{#if ../tourss.currencies}}
+				({{../../tourss.currency.abbrev}})
+			{{/if}}
+		</li>
+		{{/each}}
+	</ul>
+	{{#unless tourss.currencies}}
+		<p>All prices in {{currency.name}}.</p>
+	{{/unless}}
+	{{#if specialsUrl}}
+		{{! I'm in a new block...but the context hasn't changed (sortof) }}
+		<p>Check out our <a href="{{specialsUrl}}">specials!</p>
+	{{else}}
+		<p>Please check back often for specials.</p>
+	{{/if}}
+	<p>
+		{{#each tourss.currencies}}
+		<a href="#" class="currency">{{.}}</a>
+		{{else}}
+		Unfortunately, we currently only accept {{tourss.currency.name}}.
+		{{/each}}
+	</p>
+</div>
+
+{{#section 'header'}}
+	<meta name="robots" content="noindex">
+{{/section}}
+
+{{#section 'footer'}}
+<script type="text/javascript">
+	(function(){
+		$('#getJson').click(function(){
+			$.get('/api/test', function(data) {
+				console.info(typeof data);
+			});
+		});
+	})();
+</script>
+{{/section}}

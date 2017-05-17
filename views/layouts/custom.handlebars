@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>custom layouts</title>
+</head>
+<body>
+	<header>
+		<h1>Custom Layouts</h1>
+	</header>
+	{{{body}}}	
+	<script src="/minjs/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		(function(){
+			$('#getJson').click(function(){
+				$.get('/api/test', function(data) {
+					console.info(typeof data);
+				});
+			});
+		})();
+	</script>
+</body>
+</html>

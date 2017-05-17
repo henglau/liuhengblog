@@ -1,0 +1,14 @@
+<h4>IIS部署nodejs项目</h4>
+<p>1. 安装 node.js，官网下载 node.exe（用express的再安装express），这步略过。</p>
+<p>2. 安装 iisnode，https://github.com/tjanczuk/iisnode/wiki/iisnode-releases，IIS运行 node.js 的关键。</p>
+<p>3. 安装 url-rewrite，http://www.iis.net/downloads/microsoft/url-rewrite，express.js 项目部署需要用到 web.config 的 rewrite 配置。</p>
+<p>4. 安装 setupsamples.bat，位于 C:\Program Files\iisnode\setupsamples.bat。浏览器输入 http://localhost/node/，网页显示如下代表安装成功：</p>
+<img src="/imgs/blog4.png" alt="">
+<p>该项目位于 C:\Program Files\iisnode\www ，项目结构如下，6个文件夹内包含了6个不同的项目：</p>
+<img src="/imgs/blog5.png" alt="">
+<p>5. 部署 IIS，与部署一般网站一样绑定端口，指向 node.js 项目所在的文件夹，并复制 web.config 到项目文件夹：</p>
+<img src="/imgs/blog6.png" alt="">
+<p>这里要注意的是，IIS 指向的文件夹一定要赋予 IIS 用户读写权限：</p>
+<img src="/imgs/blog8.png" alt="">
+<p>6. 修改 web.config 的 rewrite 配置：</p>
+<img src="/imgs/blog7.png" alt="">
