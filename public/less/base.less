@@ -1,31 +1,94 @@
-body{font-family:微软雅黑,Arial;}
-img{max-width: 100%;}
-a:hover{text-decoration: none;}
-ul{list-style: none;}
-#topNav{
-	li{float: left;padding:0 10px;line-height: 55px;}
-	.glyphicon{margin-right:5px;top: 3px;}
+html{
+	font-size: 14px;
+	font-family:'微软雅黑',Arial;
 }
-#date{padding:0 10px;color: green;line-height: 55px;}
-.clearfix:after{content:'';display:table;clear:both;}
-.fl{float: left;}
-.fr{float: right;}
-header,footer,#body{margin: 0 auto;width: 1000px;}
-header{font-size: 20px;margin-bottom: 5px;}
-footer{
-	border-top: 2px solid #ccc;font-size: 20px;line-height: 20px;
-	&>div{
-		width: 350px;
-		i{margin-right: 15px;}
-		&>div{padding-left: 10px 0;padding:10px 0;}
-		&>div+div{border-top: 1px solid #ddd;}
+img{
+	max-width: 100%;
+}
+a:hover{
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+nav{
+	display: block;
+	li{
+		float: left;
+		padding:0 10/14rem;
+		line-height: 55/14rem;
 	}
-	>img{margin-top: 65px;margin-left: 20px}
+	.glyphicon{
+		margin-right:5px;
+		top: 3px;
+	}
+}
+#date{
+	padding:0 10/14rem;
+	color: green;
+	line-height: 55/14rem;
+}
+.clearfix:after{
+	content:'';display:table;clear:both;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+header,footer,#body{
+	margin: 0 auto;
+}
+header{
+	font-size: 20/14em;
+	margin-bottom: 5/14em;
+	position: relative;
+}
+footer{
+	border-top: 2px solid #ccc;
+	font-size: 20/14em;
+	line-height: 20/14em;
+	&>div{
+		width: 50%;
+		min-width: 350/14rem;
+		padding-left: .5rem;
+		i{
+			margin-right: 1rem;
+			margin-top: 3/14rem;
+		}
+		&>div{
+			padding:.7rem 0;
+		}
+		&>div+div{
+			border-top: 1px solid #ddd;
+		}
+	}
+	>img{
+		margin-top: 65/14rem;
+		margin-left: 20/14rem;
+	}
+}
+img{
+	max-width: 100%;
 }
 #home{
-	h3{margin-top: 30px;}
+	h3{
+		margin-top: 2em;
+	}
 }
-.content-list li{font-size: 16px;margin: 3px 0;}
+#navBtn{
+	display: none;
+	margin-left: 40/14rem;
+	i{
+		padding:0 20/14rem;
+		line-height: 55/14rem;
+	}
+}
+.content-list li{
+	font-size: 1.2em;
+	margin: 0.16em 0;
+}
 .btn-file {
 	position: relative;
 	overflow: hidden;
@@ -49,5 +112,34 @@ footer{
 	border-top: 1px dashed green;
 	font-size: 1.2em;
 	color: green;
-	padding: 5px 0;
+	padding: .8em 0 .5em;
+}
+@media screen and (max-width: 700px){
+	#navBtn{
+		display: block;
+	}
+	nav{
+		display: none;
+		float: none;
+		position: absolute;
+		width: 100%;
+		background-color: #fff;
+		z-index: 10;
+		top: 100%;
+		ul{
+			padding-left: 0;
+		}
+		li{
+			display: block;
+			float: none;
+			a{
+				display: block;
+			}
+		}
+	}
+}
+@media device and (max-width: 700px){
+	html{
+		font-size: 16px;
+	}
 }
