@@ -37,6 +37,9 @@ nav{
 	color: green;
 	line-height: 55/14rem;
 }
+.logo{
+	padding: 0;
+}
 .clearfix:after{
 	content:'';display:table;clear:both;
 }
@@ -47,6 +50,7 @@ nav{
 	float: right;
 }
 header,footer,#body{
+	max-width: 1000px;
 	margin: 0 auto;
 }
 header{
@@ -123,12 +127,7 @@ img{
 	color: green;
 	padding: .8em 0 .5em;
 }
-@media screen and (max-width: 700px){
-}
-@media screen and (max-device-width: 700px){
-	html{
-		font-size: 30px;
-	}
+@media screen and (max-width: 700px), screen and (max-device-width: 700px){
 	#navBtn{
 		display: block;
 	}
@@ -150,5 +149,10 @@ img{
 				display: block;
 			}
 		}
+	}
+}
+@media screen and (max-device-width: 700px){
+	html{
+		font-size: 30px;
 	}
 }
