@@ -38,5 +38,3 @@ gulp.task('serve', ['less','js'], function() {
 
 gulp.task('default', ['serve']);
 
-
-scp -i C:/Users/liuheng/Desktop/henglau.ppk /home/ha97.zip ec2-user@ec2-34-209-26-232.us-west-2.compute.amazonaws.com:/data/
