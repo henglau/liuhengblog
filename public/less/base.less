@@ -2,6 +2,15 @@ html{
 	font-size: 14px;
 	font-family:'微软雅黑',Arial;
 }
+body,ul,pre,div{
+	font-size: 100%;
+}
+h3{
+	font-size: 24/14rem;
+}
+h4{
+	font-size: 18/14rem;
+}
 img{
 	max-width: 100%;
 }
@@ -23,7 +32,7 @@ nav{
 		top: 3px;
 	}
 }
-#date{
+#date,.logo{
 	padding:0 10/14rem;
 	color: green;
 	line-height: 55/14rem;
@@ -41,14 +50,14 @@ header,footer,#body{
 	margin: 0 auto;
 }
 header{
-	font-size: 20/14em;
+	font-size: 20/14rem;
 	margin-bottom: 5/14em;
 	position: relative;
 }
 footer{
 	border-top: 2px solid #ccc;
-	font-size: 20/14em;
-	line-height: 20/14em;
+	font-size: 20/14rem;
+	line-height: 20/14rem;
 	&>div{
 		width: 50%;
 		min-width: 350/14rem;
@@ -86,7 +95,7 @@ img{
 	}
 }
 .content-list li{
-	font-size: 1.2em;
+	font-size: 1.2rem;
 	margin: 0.16em 0;
 }
 .btn-file {
@@ -110,11 +119,16 @@ img{
 }
 .link-out{
 	border-top: 1px dashed green;
-	font-size: 1.2em;
+	font-size: 1.2rem;
 	color: green;
 	padding: .8em 0 .5em;
 }
 @media screen and (max-width: 700px){
+}
+@media screen and (max-device-width: 700px){
+	html{
+		font-size: 30px;
+	}
 	#navBtn{
 		display: block;
 	}
@@ -136,10 +150,5 @@ img{
 				display: block;
 			}
 		}
-	}
-}
-@media device and (max-width: 700px){
-	html{
-		font-size: 16px;
 	}
 }
