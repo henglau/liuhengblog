@@ -8,10 +8,10 @@ var admin = express.Router();
 app.use(vhost('admin.*', admin));
 // 创建 admin 的路由； 它们可以在任何地方定义
 admin.get('/', function(req, res){
-	res.render('admin/home');
+    res.render('admin/home');
 });
 admin.get('/users', function(req, res){
-	res.render('admin/users');
+    res.render('admin/users');
 });
 </pre>
 <p>
