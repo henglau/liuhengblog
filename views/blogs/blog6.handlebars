@@ -11,8 +11,8 @@ app.use(function(req,res,next){
     if(autoViews[path]) return res.render(autoViews[path]);
     // 如果它不在缓存里， 那就看看有没有 .handlebars 文件能匹配
     if(fs.existsSync(__dirname + '/views' + path + '.handlebars')){
-    autoViews[path] = path.replace(/^\//, '');
-    return res.render(autoViews[path]);
+        autoViews[path] = path.replace(/^\//, '');
+        return res.render(autoViews[path]);
     } 
     // 没发现视图； 转到 404 处理器
     next();
