@@ -1,0 +1,23 @@
+<h4>NodeJS自动化渲染视图</h4>
+<p>
+	如果你的网站有很多内容，但功能不多，你可能发现给每个视图添加一个路由是不必要的麻烦。好在我们可以解决这个问题。比如说你想添加文件 views/foo.handlebars，然后它就神奇地可以通过路由 /foo 访问了。我们看看怎么做。在我们的应用程序文件中，就在 404 处理器之前，添加下面的中间件：
+</p>
+<pre>
+var autoViews = {};
+var fs = require('fs');
+app.use(function(req,res,next){
+var path = req.path.toLowerCase();
+// 检查缓存； 如果它在那里， 渲染这个视图
+if(autoViews[path]) return res.render(autoViews[path]);
+// 如果它不在缓存里， 那就看看有没有 .handlebars 文件能匹配
+if(fs.existsSync(__dirname + '/views' + path + '.handlebars')){
+autoViews[path] = path.replace(/^\//, '');
+return res.render(autoViews[path]);
+} 
+// 没发现视图； 转到 404 处理器
+next();
+});
+</pre>
+<p>
+	现在我们只要添加个 .handlebars 文件到 view 目录下，它就神奇地渲染在相应的路径上了。注意，常规路由会避开这一机制（ 因为我们把自动视图处理器放在了其他所有路由后面），所以如果你有个路由为 /foo 渲染了不同的视图，那它会取得优先权。
+</p>
