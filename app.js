@@ -30,8 +30,8 @@ app.set('port', process.env.PORT || 80);
 
 // 你应该把 static 中间件加在所有路由之前:
 app.use(express.static(__dirname + '/public'));
-app.locals.date = dateFormat(new Date(),'yyyy-mm-dd');
 app.use(function(req,res,next){
+	app.locals.date = dateFormat(new Date(),'yyyy-mm-dd');
 	res.locals.partials = {};
 	res.locals.partials.weather = [{location:'beijing',temp:'20 C'}];
 	next();
