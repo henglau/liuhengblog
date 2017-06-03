@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>图片放大镜插件</title>
+        <link href="jquery.jqzoom.css" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+            #divtest{width: 282px;}
+            #divtest .title{
+                padding: 8px;
+                background-color: Blue;
+                color: #fff;
+                height: 23px;
+                line-height: 23px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            #divtest .content{
+                padding: 8px 0px;
+                background-color: #fff;
+                font-size: 13px;
+            }
+            .fl{float: left;}
+            .fr{float: right;}
+        </style>
+        <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="jquery.jqzoom.js"></script>
+    </head>
+    <body>
+        <div id="divtest">
+            <div class="title">
+                <span class="fl">图片放大镜</span> 
+            </div>
+            <div class="content">
+                <a href="http://img.mukewang.com/52e4aec90001924d06800599.jpg" id="jqzoom" title="小兔子乖乖">
+                     <img src="http://img.mukewang.com/52e4aee700012df702130212.jpg" alt=""/>
+                </a>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            $(function () {
+                 //绑定图片放大插件jqzoom
+                $('#jqzoom').jqzoom({
+                    // jQZoom是一个基于最流行的jQuery的图片放大器插件。它功能强大，使用简便。支持标准模式、反转模式、无镜头、无标题的放大，并可以自定义jQZoom的窗口位置和渐隐效果，修正IE6的select bug。使用之前，先引入jQZoom.js。
+
+                    // zoomType，默认值：’standard’，另一个值是’reverse’，是否将原图用半透明图层遮盖。
+                    // zoomWidth，默认值：200，放大窗口的宽度。
+                    // zoomHeight，默认值：200，放大窗口的高度。
+                    // xOffset，默认值：10，放大窗口相对于原图的x轴偏移值，可以为负。
+                    // yOffset，默认值：0，放大窗口相对于原图的y轴偏移值，可以为负。
+                    // position，默认值：’right’，放大窗口的位置，值还可以是:’right’ ,’left’ ,’top’ ,’bottom’。
+                    // lens，默认值：true，若为false，则不在原图上显示镜头。
+                    // imageOpacity，默认值：0.2，当zoomType的值为’reverse’时，这个参数用于指定遮罩的透明度。
+                    // title，默认值：true，在放大窗口中显示标题，值可以为a标记的title值，若无，则为原图的title值。
+                    // showEffect，默认值：’show’，显示放大窗口时的效果，值可以为: ‘show’ ,’fadein’。
+                    // hideEffect，默认值：’hide’，隐藏放大窗口时的效果: ‘hide’ ,’fadeout’。
+                    // fadeinSpeed，默认值：’fast’，放大窗口的渐显速度(选项: ‘fast’,‘slow’,‘medium’)。
+                    // fadeoutSpeed，默认值：’slow’，放大窗口的渐隐速度(选项: ‘fast’,‘slow’,‘medium’)。
+                    // showPreload，默认值：true，是否显示加载提示Loading zoom(选项: ‘true’,‘false’)。
+                    // preloadText，默认值：’Loading zoom’，自定义加载提示文本。
+                    // preloadPosition，默认值：’center’，加载提示的位置，值也可以为’bycss’，以通过css指定位置。
+                    zoomType:'reverse',
+                    zoomWidth:300,
+                    zoomHeight:300,
+                    title:false
+                });
+            });
+        </script>
+    </body>
+</html>
