@@ -1,3 +1,6 @@
+{{#section 'header'}}
+	<title>刘恒的小站 - IOS与安卓平台上问题</title>
+{{/section}}
 <article class="markdown-body entry-content" itemprop="text"><h2><a id="user-content-问题列表" class="anchor" href="#问题列表" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>问题列表</h2>
 <h3><a id="user-content-伪类-active-生效" class="anchor" href="#伪类-active-生效" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>伪类 :active 生效</h3>
 <p>要CSS伪类 <code>:active</code> 生效，只需要给 document 绑定 <code>touchstart</code> 或 <code>touchend</code> 事件</p>
@@ -83,7 +86,7 @@ window.scrollX
 </code></pre>
 <h3><a id="user-content-关于-android-webview中input-元素输入时出现的怪异情况" class="anchor" href="#关于-android-webview中input-元素输入时出现的怪异情况" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>关于 Android WebView中，input 元素输入时出现的怪异情况</h3>
 <p>见图
-<a href="https://camo.githubusercontent.com/0f3c8ca4d35a2d5ee741b58f1546129f604d805f/687474703a2f2f63646e2e6269656c6f75736f762e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031322f30382f616e64726f69642d696e7075742d6c6162656c2d746578742d69737375652e706e67" target="_blank"><img src="/imgs/blog2.png" alt="怪异图" style="max-width:100%;"></a></p>
+<a href="https://camo.githubusercontent.com/0f3c8ca4d35a2d5ee741b58f1546129f604d805f/687474703a2f2f63646e2e6269656c6f75736f762e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031322f30382f616e64726f69642d696e7075742d6c6162656c2d746578742d69737375652e706e67" target="_blank"><img class="lazy" src="/imgs/loading.gif" data-original="/imgs/blog2.png" alt="怪异图" style="max-width:100%;"></a></p>
 <p>Android web视图，例如在 HTC EVO 和三星的 Galaxy Nexus 中，文本输入框在输入时表现的就像占位符。情况为一个类似水印的东西在用户输入区域，一旦用户开始输入便会消失(见图片)。</p>
 <p>在 Android 的默认样式下当输入框获得焦点后，若存在一个绝对定位或者fixed的元素，布局会被破坏，其他元素与系统输入字段会发生重叠(如搜索图标将消失为搜索字段)，可以观察到布局与原始输入字段有偏差(见截图)。
 这是一个相当复杂的问题，以下简单布局可以重现这个问题:</p>
@@ -141,7 +144,7 @@ window.scrollX
 浏览器：Chrome 26.0.1410.53
 </code></pre>
 <p>描述信息：页面包含fixed顶部的tip element，当页面向下滑动的时候Chrome地址栏自动隐藏，当向上滑动的时候地址栏自动出现。这种交互行为本身的好处会增大用户可视、交互区域。但是在Chrome 26这个版本这个浏览器UI布局使用adjustPan的方式，以至于向上滑动以后fixed的元素没有被自动向下移动（没有重绘）。</p>
-<p><a href="/public/imgs/blog1.png" target="_blank"><img src="/imgs/blog1.png" width="320px" height="480px" alt="Chrome自动隐藏地址栏影响fixed元素显示" style="max-width:100%;"></a></p>
+<p><a href="/public/imgs/blog1.png" target="_blank"><img class="lazy" src="/imgs/loading.gif" data-original="/imgs/blog1.png" width="320px" height="480px" alt="Chrome自动隐藏地址栏影响fixed元素显示" style="max-width:100%;"></a></p>
 <p><a href="https://code.google.com/p/chromium/issues/detail?id=288747">bug fixed</a>
 <a href="http://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome">解决办法在这里</a></p>
 <p>###Android平台遮罩层下的input、select、a等元素可以被点击和focus(点击穿透)</p>

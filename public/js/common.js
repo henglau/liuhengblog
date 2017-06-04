@@ -11,4 +11,9 @@ var _hmt = _hmt || [];
 		e.preventDefault();
 		$nav.toggle();
 	});
+	$('img.lazy').lazyload({
+		placeholder : '/imgs/loading.gif',
+		effect: 'fadeIn',
+		threshold :100
+	});
 })();

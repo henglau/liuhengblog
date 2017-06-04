@@ -1,3 +1,6 @@
+{{#section 'header'}}
+  <title>刘恒的小站 - Express处理子域名的方法</title>
+{{/section}}
 <h4>Express处理子域名的方法</h4>
 <p>
 	Express 中的路由机制默认不会把子域名考虑在内： app.get(/about) 会处理对 http://meadowlarktravel.com/about、 http:// www.meadowlarktravel.com/about 和 http://admin.meadowlarktravel.com/about 的请求。 如果你想分开处理子域名， 可以用 vhost 包（ 表示“ 虚拟主机”， 源自 Apache 的机制，一般用来处理子域名）。先安装这个包（ npm install -save vhost），然后编辑应用程序文件创建一个子域名：
