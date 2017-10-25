@@ -10,6 +10,9 @@ var handlebars = require('express3-handlebars').create({
 			if(!this._sections) this._sections = {};
 			this._sections[name] = options.fn(this);
 			return null;
+		},
+		lookup:function(){
+			return 'temp';
 		}
 	}
 });
@@ -68,7 +71,7 @@ app.get('/', function(req, res){
 	}else{
 		console.info(req.cookies.isFirstCome);
 	}
-   	res.render('index');
+   	res.render('index',{t:'temp'});
 });
 app.get('/blogs',function(req,res){
 	res.render('blogs');
@@ -81,6 +84,9 @@ app.get('/downloads',function(req,res){
 });
 app.get('/contact',function(req,res){
 	res.render('contact');
+});
+app.get('/yintai', function(req, res){
+	res.render('yintai/index', { layout:'yintai',csrf: 'CSRF token goes here' });
 });
 app.get('/newsletter', function(req, res){
 	res.render('newsletter', { csrf: 'CSRF token goes here' });
