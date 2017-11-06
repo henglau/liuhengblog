@@ -29,7 +29,7 @@ gulp.task('js', function () {
 // 静态服务器 + 监听 less/handlebars 文件
 gulp.task('serve', ['less','js'], function() {
     browserSync.init({
-        proxy: "http://localhost:80"
+        proxy: "http://localhost:2000"
     });
     gulp.watch("public/less/*.less", ['less']);
 	gulp.watch("public/js/*.js",['js']);

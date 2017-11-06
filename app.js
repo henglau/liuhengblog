@@ -20,13 +20,15 @@ var dateFormat = require('dateformat');
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 // body-parser中间件: 中间件是在管道中执行的,在express程序中,通过调用app.use向管道中插入中间件.
-app.use(require('body-parser')());
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // 复合表单处理中间件
 var formidable = require('formidable');
 // 这里的文件存放凭证, 如cookie密钥
 var credentials = require('./libs/credentials.js');
 app.use(require('cookie-parser')(credentials.cookieSecret));
-app.use(require('express-session')());
+app.use(require('express-session')({resave:false,saveUninitialized: true,secret:'liuheng'}));
 // 默认情况下,视图缓存会在开发模式下禁用,可以显式地启用视图缓存.
 // app.set('view cache', true);
 app.set('port', process.env.PORT || 80);
@@ -44,7 +46,14 @@ app.use(function(req,res,next){
 app.use(function(req,res,next){
 	// 如果有即显消息， 把它传到上下文中， 然后清除它
 	res.locals.flash = req.session.flash;
+	if(req.session.loginErrorMsg){
+		res.locals.loginErrorMsg = req.session.loginErrorMsg;
+	}
+	if(req.session.username){
+		res.locals.username = req.session.username;
+	}
 	delete req.session.flash;
+	delete req.session.loginErrorMsg;
 	next();
 });
 // var mysql = require('mysql');
@@ -87,6 +96,37 @@ app.get('/contact',function(req,res){
 });
 app.get('/yintai', function(req, res){
 	res.render('yintai/index', { layout:'yintai',csrf: 'CSRF token goes here' });
+});
+app.get('/yintai/login', function(req, res){
+	res.render('yintai/login', { layout:'yintai'});
+});
+app.post('/yintai/postLogin', function(req, res){
+	console.info(req.body.inputEmail,req.body.inputPassword1);
+	if(req.body.inputEmail=='henglau@163.com' && req.body.inputPassword1=='abcd13410248376'){
+		req.session.username = 'liuheng';
+		res.redirect(302,'/yintai/plan');
+	}else{
+		req.session.loginErrorMsg = '用户或账号密码错误';
+		res.redirect('/yintai/login');
+	}
+});
+app.get('/yintai/regist', function(req, res){
+	res.render('yintai/regist', { layout:'yintai'});
+});
+app.post('/yintai/postRegist', function(req, res){
+	console.info(req.body.inputEmail,req.body.inputPassword1,req.body.inputPassword2);
+	res.redirect(302,'/yintai/plan');
+});
+app.get('/yintai/logout', function(req, res){
+	delete req.session.username;
+	res.redirect(302,'/yintai');
+});
+app.get('/yintai/plan', function(req, res){
+	if(req.session.username){
+		res.render('yintai/plan', { layout:'yintai'});
+	}else{
+		res.redirect('/yintai/login');
+	}
 });
 app.get('/newsletter', function(req, res){
 	res.render('newsletter', { csrf: 'CSRF token goes here' });

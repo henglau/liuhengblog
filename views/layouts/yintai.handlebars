@@ -20,20 +20,48 @@
 				<li>
 					<a href="/yintai"><i class="glyphicon glyphicon-menu-hamburger"></i>我要了解</a>
 					<ul>
-						<li><a href="#">平台作用</a></li>
-						<li><a href="#">平台操作说明</a></li>
 						<li><a href="#">商业保险介绍</a></li>
 						<li><a href="#">默认方案</a></li>
-						<li><a href="#">保障内容说明</a></li>
+						<li><a href="#">平台作用</a></li>
+						<li><a href="#">平台操作说明</a></li>
 					</ul>
 				</li>
-				<li><a href="/yintai"><i class="glyphicon glyphicon-menu-hamburger"></i>我要投保</a></li>
+				<li>
+					<a href="/yintai/plan"><i class="glyphicon glyphicon-menu-hamburger"></i>我要投保</a>
+					<ul>
+						<li><a href="#">杭州银云商业管理有限公司</a></li>
+						<li><a href="#">杭州云泰购物中心有限公司商业管理分公司</a></li>
+						<li><a href="#">杭州银泰购物中心有限公司商业管理分公司</a></li>
+						<li><a href="#">宁波银泰城商业管理有限公司</a></li>
+						<li><a href="#">平阳银泰置业有限公司商业管理分公司</a></li>
+						<li><a href="#">台州银泰商业有限公司椒江分公司</a></li>
+						<li><a href="#">杭州西溪银盛置地有限公司商业管理分公司</a></li>
+						<li><a href="#">宁波经济技术开发区泰悦置业有限公司北仑银泰城管理分公司</a></li>
+						<li><a href="#">传富置业（成都）有限公司</a></li>
+						<li><a href="#">苍南银泰置业有限公司商业管理分公司</a></li>
+						<li><a href="#">名尚银泰城（淄博）商业发展有限公司</a></li>
+						<li><a href="#">哈尔滨银悦商业管理有限公司</a></li>
+						<li><a href="#">东阳银泰城商业管理有限公司</a></li>
+						<li><a href="#">奉化银泰百货有限公司</a></li>
+						<li><a href="#">奉化银泰置业有限公司商业管理分公司</a></li>
+					</ul>
+				</li>
 				<li><a href="/yintai"><i class="glyphicon glyphicon-menu-hamburger"></i>我要理赔</a></li>
 				<li><a href="/downloads"><i class="glyphicon glyphicon-hamburger"></i>我要问</a></li>
 				<li><a href="/contact"><i class="glyphicon glyphicon-notice"></i>公告</a></li>
+				{{#if username}}
+				<li>
+					<a href="javascript:;">{{username}}</a>
+					<ul>
+						<li><a href="/yintai/logout">退出账户</a></li>
+					</ul>
+				</li>
+				{{else}}
+				<li><a href="/yintai/login"><span class="btn btn-success regist-login">登录</span></a></li>
+				{{/if}}
 			</ul>
 		</nav>
-		<b class="fr" id="date"><i class="glyphicon glyphicon-calendar"></i>: {{date}}</b>
+		<!-- <b class="fr" id="date"><i class="glyphicon glyphicon-calendar"></i>: {{date}}</b> -->
 	</header>
 	<div id="body">
 		{{{body}}}
@@ -57,6 +85,7 @@
 	<script src="/minjs/bootstrap.min.js"></script>
 	{{{_sections.footer}}}
 	<script type="text/javascript" charset="utf-8" src="/minjs/common.min.js?20170604"></script>
+	<script type="text/javascript" src="/minjs/yintai_index.min.js"></script>
 </body>
 
 </html>
