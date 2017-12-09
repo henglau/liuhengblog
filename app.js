@@ -31,7 +31,7 @@ app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('express-session')({resave:false,saveUninitialized: true,secret:'liuheng'}));
 // 默认情况下,视图缓存会在开发模式下禁用,可以显式地启用视图缓存.
 // app.set('view cache', true);
-app.set('port', process.env.PORT || 3389);
+app.set('port', process.env.PORT || 80);
 
 // 你应该把 static 中间件加在所有路由之前:
 app.use(express.static(__dirname + '/public'));
