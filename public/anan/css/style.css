@@ -42,6 +42,12 @@ label{
 	float:left;
 	margin-top: 13px;
 }
+.logo a:hover{
+	text-decoration: none;
+}
+.none{
+	display: none;
+}
 .header-right{
 	float:right;
 }
