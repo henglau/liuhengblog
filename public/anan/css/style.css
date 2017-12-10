@@ -1954,7 +1954,7 @@ margin-bottom:3em;
 		width: 100%;
 	}
 	.logo {
-		width: 50%;
+		width: 70%;
 	}
 	.error-404 h2 {
 		font-size: 15em;
@@ -2095,7 +2095,7 @@ margin-bottom:3em;
 }
 @media screen and (max-width: 640px) {
 	.logo {
-		width: 24%;
+		width: 70%;
 	}
 	.banner-info {
 		width: 50%;
@@ -2362,7 +2362,7 @@ margin-bottom:3em;
 }
 @media screen and (max-width: 480px) {
 	.logo {
-		width: 27%;
+		width: 70%;
 	}
 	span.menu {
 		width: 21px;
@@ -2588,7 +2588,7 @@ margin-bottom:3em;
 }
 @media screen and (max-width: 320px) {
 	.logo {
-		width: 38%;
+		width: 70%;
 	}
 	span.menu {
 		margin-top: -23px;
