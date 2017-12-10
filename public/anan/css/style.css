@@ -2778,4 +2778,62 @@ margin-bottom:3em;
 		font-size: 0.92em;
 	}
 }
-
+.nbrbodynew {
+    border-bottom: 1px solid #E7E7E7;
+    padding-bottom: 19px;
+    padding-top: 23px;
+    margin-left: 24px;
+    margin-right: 16px;
+    padding-right: 12px;
+    padding-left: 5px;
+}
+.nbrbodynewl {
+    float: left;
+    width: 154px;
+    height: 102px;
+    border: 1px solid #C1C1C1;
+    text-align: center;
+}
+.nbrbodynewr {
+	overflow: hidden;
+    padding-left: 15px;
+    font-size: 12px;
+}
+.nbrbodynewr1 a{
+    font-size: 14px;
+    color: #c4261d;
+}
+.nbrbodynewr2 {
+    color: #666;
+    line-height: 22px;
+    padding-top: 6px;
+}
+.nbrbodynewr3 {
+    line-height: 22px;
+    padding-top: 8px;
+}
+.Pagination {
+    height: 55px;
+    padding-top: 25px;
+    padding-left: 300px;
+    line-height: 20px;
+    color: #565656;
+    clear: both;
+}
+.Pagination a {
+    font-size: 12px;
+    text-decoration: none;
+    display: block;
+    float: left;
+    color: #808080;
+    border: 1px solid #cacaca;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 8px;
+    margin: 0 5px;
+}
+.Pagination a:hover, .Pagination a.PageCur {
+    background-color: #696C75;
+    border: 1px solid #cacaca;
+    color: #fff;
+}
