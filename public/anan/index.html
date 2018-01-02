@@ -7,6 +7,8 @@
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,7 +16,20 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--webfont-->
-
+<style type="text/css">
+	#owl-demo {
+	    width: 100%;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	#owl-demo .item {
+	    display: block;
+	}
+	#owl-demo img {
+	    display: block;
+	    width: 100%;
+	}
+</style>
 </head>
 <body>
 	<!-- header-section-starts -->
@@ -28,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<span class="menu"></span>
 				<div class="top-menu">
 					<ul>                                              
-						<li><a class="active" href="">主页</a></li>
+						<li><a class="active" href="index.html">主页</a></li>
 						<li><a href="products.html">产品</a></li>
 						<li><a href="plan.html">行业方案</a></li>
 						<li><a href="services.html">客户展示</a></li>
@@ -51,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!-- header-section-ends -->
-	<div class="banner">
+<!-- 	<div class="banner">
 		<div class="container">
 			<div class="banner-info">
 				<h2>Telecom and IT support provider for small business</h2>
@@ -60,8 +75,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href="contact.html" class="btn btn-1 btn-1d">Request a quote</a>
 			</div>
 		</div>
-	</div>
-    <div class="copyrights">Collect from <a href="http://www.ANAN-SZ.com/" >企业网站</a></div>
+	</div> -->
+	<div id="owl-demo" class="owl-carousel">
+	    <a class="item"><img src="images/banner.jpg" alt=""></a>
+	    <a class="item"><img src="images/banner2.jpg" alt=""></a>
+	</div> 	  	       	   	    	
+	<script type="text/javascript">
+		$(window).load(function() {
+			$(function(){
+			    $('#owl-demo').owlCarousel({
+			        items: 1,
+			        autoPlay: true,
+			        singleItem: true
+			    });
+			});
+		});
+	</script>
 	<div class="content">
 	<div class="services-section">
 		<div class="container">
@@ -179,6 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clear"> </div>      
 						  <!---strat-image-cursuals---->
 								<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+								<script type="text/javascript" src="js/owl.carousel.js"></script>
 								<!---End-image-cursuals---->
 								<script type="text/javascript">
 								$(window).load(function() {

@@ -1443,6 +1443,14 @@ margin-bottom:3em;
 		padding: 2em 0 3em 0;
 	}
 }
+@media screen  and (max-width: 1200px) {
+	.nbs-flexisel-nav-right{
+		right: 24.5em;
+	}
+	.nbs-flexisel-nav-left{
+		left: 24.5em;
+	}
+}
 @media screen and (max-width: 1024px) {
 	.header-right h4 {
 		font-size: 1.55em;
@@ -1553,13 +1561,7 @@ margin-bottom:3em;
 		font-size:1.4em;
 	}
 	.client-text {
-		padding: 0 3em;
-	}
-	.nbs-flexisel-nav-right{
-		right: 24.5em;
-	}
-	.nbs-flexisel-nav-left{
-		left: 24.5em;
+		padding: 0 1em;
 	}
 	.description {
 		padding: 1.6em 0 0 0;
@@ -1747,6 +1749,22 @@ margin-bottom:3em;
 	}
 	a.readblog {
 		font-size: 1.4em;
+	}
+}
+@media screen and (max-width: 991px) {
+	.description {
+		float: left;
+	}
+	.nbs-flexisel-nav-right{
+		right: 17.5em;
+	}
+	.nbs-flexisel-nav-left{
+		left: 17.5em;
+	}
+	.services-section-grid1,
+	.services-section-grid2,
+	.services-section-grid3 {
+		float: left;
 	}
 }
 @media screen and (max-width: 800px) {
@@ -2164,6 +2182,12 @@ margin-bottom:3em;
 	span.menu {
 		margin-top: -32px;
 	}
+	.nbs-flexisel-nav-left {
+		left: 42%;
+	}
+	.nbs-flexisel-nav-right {
+		right: 42%;
+	}
 }
 @media screen and (max-width: 640px) {
 	.nbrbodynewl {
@@ -2352,10 +2376,10 @@ margin-bottom:3em;
 		min-height: 153px;
 	}
 	.nbs-flexisel-nav-right {
-		right: 13.5em;
+		right: 40%;
 	}
 	.nbs-flexisel-nav-left {
-		left: 13.5em;
+		left: 40%;
 	}
 	.testimonials-section-head h3 {
 		font-size: 2em;
@@ -2541,10 +2565,10 @@ margin-bottom:3em;
 		overflow:hidden;
 	}
 	.nbs-flexisel-nav-right {
-		right: 9.5em;
+		right: 38%;
 	}
 	.nbs-flexisel-nav-left {
-		left: 9.5em;
+		left: 38%;
 	}
 	.description {
 		min-height: 137px;
