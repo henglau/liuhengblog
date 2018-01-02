@@ -7,6 +7,8 @@
 <script src="js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,7 +16,20 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--webfont-->
-
+<style type="text/css">
+	#owl-demo {
+	    width: 100%;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+	#owl-demo .item {
+	    display: block;
+	}
+	#owl-demo img {
+	    display: block;
+	    width: 100%;
+	}
+</style>
 </head>
 <body>
 	<!-- header-section-starts -->
@@ -50,17 +65,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	<!-- header-section-ends -->
-	<div class="banner">
-		<div class="container">
-			<div class="banner-info">
-				<h2>Telecom and IT support provider for small business</h2>
-				<p>Our services are fully managed and we</p>
-				<p>view ourselves as IT department of our company</p>
-				<a href="contact.html" class="btn btn-1 btn-1d">Request a quote</a>
-			</div>
-		</div>
-	</div>
+	<div id="owl-demo" class="owl-carousel">
+	    <a class="item"><img src="images/banner.jpg" alt=""></a>
+	    <a class="item"><img src="images/banner2.jpg" alt=""></a>
+	</div> 	  	       	   	    	
+	<script type="text/javascript">
+		$(window).load(function() {
+			$(function(){
+			    $('#owl-demo').owlCarousel({
+			        items: 1,
+			        autoPlay: true,
+			        singleItem: true
+			    });
+			});
+		});
+	</script>
     <div class="copyrights">Collect from <a href="http://www.ANAN-SZ.com/" >企业网站</a></div>
 	<div class="content">
 	<div class="services-section">
@@ -178,7 +197,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="nbs-flexisel-nav-right" style="display:none"></div></div></div> 
 							<div class="clear"> </div>      
 						  <!---strat-image-cursuals---->
-								<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 								<!---End-image-cursuals---->
 								<script type="text/javascript">
 								$(window).load(function() {
@@ -228,25 +246,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="col-md-8 description">
 						<div class="course_demo">
-		          <ul id="flexiselDemo4">	
-					<li>
-						<div class="client-text">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru.</p>
-						</div>
-					</li>
-					<li>
-						<div class="client-text">		
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-						</div>
-					</li>	
-					<li>
-						<div class="client-text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
-						</div>
-					</li>									    	  	       	   	  									    	  	       	   	    	
-				</ul>
-
-	  </div>
+				          <ul id="flexiselDemo4">	
+							<li>
+								<div class="client-text">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru.</p>
+								</div>
+							</li>
+							<li>
+								<div class="client-text">		
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+								</div>
+							</li>	
+							<li>
+								<div class="client-text">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
+								</div>
+							</li>	    	  	       	   	    	
+						</ul>
+					 </div>
 		<script type="text/javascript">
 			$(window).load(function() {
 				$("#flexiselDemo4").flexisel({
@@ -275,6 +292,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			});
 		</script>
 		<script type="text/javascript" src="js/jquery.flexisel.js"></script>	
+		<script type="text/javascript" src="js/owl.carousel.js"></script>	
 
 				    </div>
 					<div class="clearfix"></div>
