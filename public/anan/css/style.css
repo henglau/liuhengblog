@@ -569,9 +569,21 @@ i.linkedin{
 	font-weight: 300;
 	margin-top: 1em;
 }
-
+.products_overview .col-xs-4{
+	text-align: center;
+}
+.products_overview h4{
+	font-weight: 500;
+	margin: .5em 0;
+}
+.products_overview h4 a {
+	color: #feb913;
+}
+.products_overview .img-responsive{
+	display: inline;
+}
 /*-- services-page-starts-here --*/
-.services_overview h3 {
+.services_overview h3, .products_overview h3 {
 	color: #fff;
 	font-size: 2.7em;
 	font-weight: 300;
@@ -582,6 +594,7 @@ i.linkedin{
 	padding: 0;
 	width: 31.333%;
 	margin-right: 3%;
+	float: left;
 }
 .span_55{
 	margin-right:0;
@@ -600,7 +613,7 @@ i.linkedin{
 	line-height: 1.8em;
 	margin: 8px 0 0 0;
 }
-.services_overview{
+.services_overview, .products_overview{
 	background:#1a1a1a;
 	padding: 4em 0;
 }
@@ -1361,7 +1374,7 @@ margin-bottom:3em;
 	.contact-form {
 		padding: 3.5em 3em;
 	}
-	.services_overview {
+	.services_overview, .products_overview {
 		padding: 3em 0;
 	}
 	.blog-section {
@@ -1655,12 +1668,12 @@ margin-bottom:3em;
 	.error-404 h2 {
 		font-size: 17em;
 	}
-	.services_overview h3 {
+	.services_overview h3, .products_overview h3 {
 		font-size: 2.5em;
 		letter-spacing: 1px;
 		margin-bottom: 0.5em;
 	}
-	.services_overview {
+	.services_overview, .products_overview {
 		padding: 2em 0;
 	}
 	.service_grid h4 {
@@ -2058,7 +2071,7 @@ margin-bottom:3em;
 	.span_55 {
 		margin-right: 0;
 	}
-	.services_overview h3 {
+	.services_overview h3, .products_overview h3 {
 		font-size: 2.3em;
 		letter-spacing: 0px;
 		margin-bottom: 0.6em;
@@ -2066,6 +2079,9 @@ margin-bottom:3em;
 	.service_grid h4 {
 		font-size: 0.94em;
 		margin: 12px 0 0 0;
+	}
+	.products_overview h4 {
+		font-size: .9em;
 	}
 	.service_grid p {
 		margin: 5px 0 0px 0;
@@ -2438,11 +2454,11 @@ margin-bottom:3em;
 		font-size: 21px;
 		line-height: 60px;
 	}
-	.services_overview h3 {
+	.services_overview h3, .products_overview h3 {
 		font-size: 2em;
 		margin-bottom: 0.5em;
 	}
-	.services_overview {
+	.services_overview, .products_overview {
 		padding: 1.5em 0;
 	}
 	p.text1 {
