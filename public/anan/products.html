@@ -53,33 +53,56 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="products_overview">
 		<div class="container">
        		<h3>产品中心</h3>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod1.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品1</a></h4>
-       			<!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p> -->
+       		<div style="padding-bottom: 2em;" class="clearfix">
+       			<span class="menu prod_menu" style="float: left;margin-top: 0;"></span>
+				<div class="top-menu prod_cate">
+					<ul>                                              
+						<li><a href="products.html" class="active">全部</a></li>
+						<li><a href="products_cate1.html">超限超载检测</a></li>
+						<li><a href="products_cate2.html">长宽高测量</a></li>
+						<li><a href="products_cate3.html">智能交通</a></li>
+						<li><a href="products_cate4.html">高速称重</a></li>
+					</ul>
+				</div>
+				<!-- script for menu -->
+				<script>
+					$( "span.prod_menu" ).click(function() {
+					  $( ".prod_cate" ).slideToggle( "fast", function() {
+					    // Animation complete.
+					  });
+					});
+				</script>
        		</div>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod2.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品2</a></h4>
+       		<div class="clearfix prods_list">
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod1.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品1</a></h4>
+	       			<!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p> -->
+	       		</div>
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod2.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品2</a></h4>
+	       		</div>
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod3.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品3</a></h4>
+	       		</div>
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod4.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品4</a></h4>
+	       		</div>
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod5.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品5</a></h4>
+	       		</div>
+	       		<div class="col-xs-4">
+	       			<a href="#"><img data-original="images/prod6.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
+	       			<h4><a href="#">产品6</a></h4>
+	       		</div>
        		</div>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod3.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品3</a></h4>
-       		</div>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod4.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品4</a></h4>
-       		</div>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod5.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品5</a></h4>
-       		</div>
-       		<div class="col-xs-4">
-       			<a href="#"><img data-original="images/prod6.jpg" src="images/prod1.jpg" class="img-responsive" alt=""/></a>
-       			<h4><a href="#">产品6</a></h4>
-       		</div>
-
-			<div class="clearfix"></div>
+			<div class="more_prods">
+				显示更多
+			</div>
        	</div>
 	</div>
 	<div class="subscribe-section" style="display: none;">
@@ -271,7 +294,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    		}
 		    	}
 		    });
-		    
+			$('.more_prods').click(function(){
+				var $prodsList = $('.prods_list');
+				$prodsList.children().filter(function(index,elem){
+					return index<4;
+				}).clone().appendTo($prodsList);
+			});
 		});
 	</script>
 </body>

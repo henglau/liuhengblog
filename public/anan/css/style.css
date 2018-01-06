@@ -1278,6 +1278,17 @@ margin-bottom:3em;
 	font-weight: 600;
 	margin: 15px 0px;
 }
+.more_prods {
+	width: 260px;
+	margin: 0 auto;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #ddd;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
 
 /*-- responsive-design starts-here --*/
 
