@@ -1297,6 +1297,12 @@ margin-bottom:3em;
 	color: inherit;
 	font-family: inherit;
 }
+.prod_detail .top-menu ul li a{
+	color: #333;
+}
+.prod_detail span.menu{
+	background-image: url('../images/nav2.png');
+}
 h4.prod_name {
 	text-align: center;
 	margin-bottom: .5em;

@@ -53,6 +53,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="products_overview prod_detail">
 		<div class="container">
        		<h3>产品详情</h3>
+       		<div style="padding-bottom: 2em;" class="clearfix">
+       			<span class="menu prod_menu" style="float: left;margin-top: 0;"></span>
+				<div class="top-menu prod_cate">
+					<ul>                                              
+						<li><a href="products.html" class="active">全部</a></li>
+						<li><a href="products_cate1.html">超限超载检测</a></li>
+						<li><a href="products_cate2.html">长宽高测量</a></li>
+						<li><a href="products_cate3.html">智能交通</a></li>
+						<li><a href="products_cate4.html">高速称重</a></li>
+					</ul>
+				</div>
+				<!-- script for menu -->
+				<script>
+					$( "span.prod_menu" ).click(function() {
+					  $( ".prod_cate" ).slideToggle( "fast", function() {
+					    // Animation complete.
+					  });
+					});
+				</script>
+       		</div>
        		<div class="clearfix">
        			<h4 class="prod_name">产品名称</h4>
        			<div class="prod_img"><img src="images/prod1.jpg" class="img-responsive prod_img"></div>
