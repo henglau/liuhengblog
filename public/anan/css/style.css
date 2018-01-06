@@ -1310,7 +1310,9 @@ h4.prod_name {
 .prod_img {
 	text-align: center;
 }
-
+.newlist, .newlist a {
+	color: #808080;
+}
 /*-- responsive-design starts-here --*/
 
 @media screen and (max-width: 1366px) {
