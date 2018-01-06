@@ -1289,6 +1289,21 @@ margin-bottom:3em;
 	font-weight: bold;
 	cursor: pointer;
 }
+.prod_detail {
+	background-color: #fff;
+	border-bottom: 1px solid #ddd;
+}
+.prod_detail.products_overview h3 {
+	color: inherit;
+	font-family: inherit;
+}
+h4.prod_name {
+	text-align: center;
+	margin-bottom: .5em;
+}
+.prod_img {
+	text-align: center;
+}
 
 /*-- responsive-design starts-here --*/
 
