@@ -256,12 +256,19 @@ app.get('/testdata', function(req, res){
 	// layout 可以是自定义layout,也可以无layout(设置layout属性为null)
    res.render('testdata',{weixin:'<b>13410248376</b>',tourss:tourss});
 });
-app.get('/api/test',function(req,res){
+app.get('/api/get',function(req,res){
 	res.format({
 		'application/json':function(){
 			res.json({version:'1.0.0',author:'ooo'});
 		}
 	});
+});
+app.post('/api/post',function(req,res){
+	if(req.body.name==='liuheng' && req.body.password==='Abcd13410248376!'){
+		res.json({status: 'success', name: 'liuheng'});
+	}else{
+		res.json({status: 'fail', name: 'unkown'});
+	}
 });
 app.post('/process',function(req,res){
 	console.log('Form (from querystring): ' + req.query.form);
