@@ -1,6 +1,8 @@
 'use strict';
 var express = require('express');
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 app.disable('x-powered-by');
 // 设置 handlebars 视图引擎
 var handlebars = require('express3-handlebars').create({ 
@@ -56,6 +58,14 @@ app.use(function(req,res,next){
 	delete req.session.loginErrorMsg;
 	next();
 });
+app.use(function(req,res,next){
+	// 如果有即显消息， 把它传到上下文中， 然后清除它
+	if(req.session.choujiangLoginErr){
+		res.locals.choujiangLoginErr = req.session.choujiangLoginErr;
+	}
+	delete req.session.choujiangLoginErr;
+	next();
+});
 // var mysql = require('mysql');
 // var DATABASE = require('./libs/database.js');
 app.get('/', function(req, res){
@@ -93,6 +103,28 @@ app.get('/downloads',function(req,res){
 });
 app.get('/contact',function(req,res){
 	res.render('contact');
+});
+app.get('/choujiang',function(req,res){
+	res.render('choujiang/index',{layout: null});
+});
+app.get('/choujiang/server',function(req,res){
+	if(req.session.user === 'yulu'){
+		res.render('choujiang/server',{layout: null});
+	}else{
+		res.redirect(302,'/choujiang/login');
+	}
+});
+app.get('/choujiang/login',function(req,res){
+	res.render('choujiang/login',{layout: null});
+});
+app.post('/choujiang/postLogin', function(req, res){
+	if(req.body.user === 'yulu' && req.body.password === '123456'){
+		req.session.user = 'yulu';
+		res.redirect(302,'/choujiang/server');
+	}else{
+		req.session.choujiangLoginErr = '用户或账号密码错误';
+		res.redirect('/choujiang/login');
+	}
 });
 app.get('/yintai', function(req, res){
 	res.render('yintai/index', { layout:'yintai',csrf: 'CSRF token goes here' });
@@ -294,6 +326,17 @@ app.use('/upload',function(req,res,next){
 		}
 	})(req,res,next);
 });
+
+
+//socket.io
+io.on('connection', function(socket){
+	console.log('a user connected');
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+	    console.log(data);
+	});
+});
+
 // 定制404页面
 app.use(function(req, res){
    res.status(404).render('404');
@@ -303,7 +346,7 @@ app.use(function(err, req, res, next){
    console.error(err.stack);
    res.status(500).render('500');
 });
-app.listen(app.get('port'), function(){
+http.listen(app.get('port'), function(){
 	console.log('Express started on http://localhost:' +
     app.get('port') + '; press Ctrl-C to terminate.');
 });

@@ -1,0 +1,28 @@
+* { margin: 0; padding: 0; }
+body{overflow:hidden;min-width: 800px;}
+li { list-style: none; }
+.clear { clear: both; }
+.bg { width: 100%; max-width: 1920px; height: auto; position: relative; }
+.bg img { width: 100%; }
+.box { width: 100%; max-width: 896px; height: auto; margin: auto; text-align: center; position: absolute; top: 25%; left: 0; right: 0; }
+.jz { float: left; width: 420px; height: auto; margin: auto; padding-left: 75px;padding-top: 12px; overflow: hidden; }
+.jz p { line-height: 80px; text-align: center; font-size: 50px; color: #ffffff; }
+.jz span { display: block; width: 420px; height: 80px; line-height: 80px; margin: 20px 0; text-align: center; font-size: 60px; background: #ffffff; }
+.start, .stop { float: left; width: 150px; height: 60px; line-height: 60px; text-align: center; font-size: 40px; border-radius: 10px; margin: auto; color: #ffffff; cursor: pointer; margin: 15px 30px; }
+.start { background: #24ADD7; }
+#btntxt.start,#btntxt.stop {float: none;margin: 15px auto;}
+.stop { background: #FC6666; }
+.zjmd { float: left; width: 300px; height: 400px; background: #666; margin-top: 30px; margin-left: 30px; background: #ffffff; overflow: auto; }
+.zjmd .p1 { line-height: 40px; text-align: center; font-size: 20px; padding: 0; }
+.zjmd p { line-height: 40px; font-size: 20px; text-align: justify; padding-left: 20px; }
+/* .zjmd p span { padding: 0 5px; } */
+.list { height: auto; overflow: auto; }
+.confirmbox { width: 670px; height: auto; position: fixed; top: 100px; left: 0; right: 0; margin: auto; display: none; background: url(box_bg.jpg) repeat center; border-radius: 50px; overflow:hidden;}
+.conbox { width: 600px; height: auto; margin: auto; padding-left:50px;}
+.conbox ul li { float: left; width: 50%; height: 45px; line-height: 45px; text-align: center; font-size: 18px; font-weight: bold; }
+.conbox p { float: left; width: 50%; height: 45px; line-height: 45px; text-align: left; font-size: 24px; font-weight: bold; color: #FF2525; }
+.btnbox { width: 320px; height: auto; margin: auto; }
+.new_s { width: 140px; height: 40px; line-height: 40px; font-size: 30px; margin:3px;margin: 20px 10px;}
+.lucknum { text-align: center; line-height: 40px; font-size: 28px; font-weight: bold; color: #F30606; }
+.svbtn {float: right; font-size: 24px; margin-left: 90px; height: 40px; line-height: 40px;/*  background:none;border:none; */}
+.zj_bottom, .zj_top { width: 502px; height: auto; margin: auto; }
