@@ -1,4 +1,21 @@
-/*承接建站 270168164*/
+//连接websocket后端服务器
+var socket = io.connect('ws://localhost:3000');
+
+socket.on('start', function(){
+	start();
+});
+
+socket.on('stop', function(){
+	start();
+});
+
+socket.on('qr', function(){
+	qr();
+});
+
+socket.on('qx', function(){
+	qx();
+});
 
 var xinm = new Array();
 var phone = new Array();
@@ -243,27 +260,6 @@ function start() {
 	}
 }
 
-// 幸运奖开始停止
-function luck(){
-	if(runing){
-		runing = false;
-		$('#btnluck').removeClass('start').addClass('stop');
-		$('#btnluck').html('停止');
-		startNum();
-	}else{
-		runing = true;
-		$('#btnluck').removeClass('stop').addClass('start');
-		$('#btnluck').html('幸运奖');
-		stop();
-		luck2();
-		dl();
-	}
-	if(!$('#btnqr').hasClass('xn')){
-		$('#btnqr').addClass('xn');
-	}
-	$('#btnqx').css('display','none');
-	$('.lucknum').css('display','block');
-}
 //循环参加名单
 function startNum() {
 	pcount = xinm.length;
@@ -286,71 +282,16 @@ function bzd() {
 	//打印中奖者名单
 	$('.conbox').prepend("<p style='width:80%;font-size:38px;padding:30px;text-align: center;color:#FF2525;'>"+xinm[num]+"   "+phone[num]+"</p>");
 	$('.confirmbox').show();
-	//将已中奖者从数组中"删除",防止二次中奖
-	xinm.splice($.inArray(xinm[num], xinm), 1);
-	phone.splice($.inArray(phone[num], phone), 1);
+	socket.emit('select', {user: xinm[num],phone: phone[num]});
 	
 	return pcount;
 }
-//幸运奖循环
-function luck2(){
-	var arr=[];
-    var json={};
-    pcount = xinm.length;
-    if(pcount < numr){
-    	alert('无法抽奖');
-    }else{
-	    //循环随机数10次
-	    for(var i = 0;arr.length<numr;i++){
-	    	//产生单个随机数
-            var ranNum = Math.floor(Math.random()*pcount);
-            //通过判断json对象的索引值是否存在 来标记 是否重复
-            if(!json[ranNum]){
-                json[ranNum]=1;
-                arr.push(ranNum);
-            }
-        }
-    }
-    //打印幸运奖名单,每次10名
-    $.each(arr,function(i){
-    	$('.conbox').prepend("<p>"+xinm[arr[i]]+" - "+phone[arr[i]]+"</p>");
-    	$('.name').html(xinm[arr[i]]);
-    	$('.phone').html(phone[arr[i]]);
-    	$('.confirmbox').show();
 
-    	delete xinm[arr[i]];
-    	delete phone[arr[i]];
-    })
-    //替换循环停止人名
-    $.each(arr,function(z,val){
-    	if(z == 9){
-    		nametxt.html(xinm[arr[9]]);
-			phonetxt.html(phone[arr[9]]);
-    	}
-    })      
-    pcount = xinm.length;
-	return pcount;
-
-}
-
-//删除幸运奖中奖
-function dl(){
-	var testn = [];
-	var testp = [];
-	$.each(xinm,function(i,vl){
-		if(typeof(xinm[i]) != 'undefined'){
-			testn.push(xinm[i]);
-			testp.push(phone[i]);
-		}
-	})
-	xinm.splice(0,xinm.length);
-	phone.splice(0,phone.length);
-	xinm = xinm.concat(testn);
-	phone = phone.concat(testp);
-}
-//确认
-$('#btnqr').on('click',function(){
-
+//确认中奖
+function qr(){
+	//将已中奖者从数组中"删除",防止二次中奖
+	xinm.splice($.inArray(xinm[num], xinm), 1);
+	phone.splice($.inArray(phone[num], phone), 1);
 	var cp = $('.conbox').find('p').removeAttr('style').clone();
 	$('.zjmd_bt_xy').find('p').eq(0).css({'margin-top':'10px','border-top':'1px solid #FF2525'});
 	$('.zjmd_bt_xy').prepend(cp);
@@ -359,69 +300,18 @@ $('#btnqr').on('click',function(){
 	//中奖名单排序
 	$('.list').find('p').each(function(i){
 		$(this).find('span').remove();
-	})
-})
+	});
+}
 
-//取消
-$('#btnqx').on('click',function(){
+//取消中奖
+function qx(){
 	$('.conbox').empty();
 	$('.confirmbox').hide();
-})
+}
 
 
 
 
-var wsUri ="ws://localhost:3000/"; 
-var output;  
-
-function init() { 
-    testWebSocket(); 
-}  
-
-function testWebSocket() { 
-    websocket = new WebSocket(wsUri); 
-    websocket.onopen = function(evt) { 
-        onOpen(evt) 
-    }; 
-    websocket.onclose = function(evt) { 
-        onClose(evt) 
-    }; 
-    websocket.onmessage = function(evt) { 
-        onMessage(evt) 
-    }; 
-    websocket.onerror = function(evt) { 
-        onError(evt) 
-    }; 
-}  
-
-function onOpen(evt) { 
-    writeToScreen("CONNECTED"); 
-    doSend("WebSocket rocks"); 
-}  
-
-function onClose(evt) { 
-    writeToScreen("DISCONNECTED"); 
-}  
-
-function onMessage(evt) { 
-    writeToScreen('<span style="color: blue;">RESPONSE: '+ evt.data+'</span>'); 
-    websocket.close(); 
-}  
-
-function onError(evt) { 
-    writeToScreen('<span style="color: red;">ERROR:</span> '+ evt.data); 
-}  
-
-function doSend(message) { 
-    writeToScreen("SENT: " + message);  
-    websocket.send(message); 
-}  
-
-function writeToScreen(message) { 
-    console.info(message);
-}  
-
-window.addEventListener("load", init, false); 
 
 
 

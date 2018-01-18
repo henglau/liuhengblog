@@ -330,11 +330,22 @@ app.use('/upload',function(req,res,next){
 
 //socket.io
 io.on('connection', function(socket){
-	console.log('a user connected');
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-	    console.log(data);
+	socket.on('start', function (data) {
+		io.emit('start', { action: 'start' });
 	});
+	socket.on('stop', function (data) {
+		io.emit('stop', { action: 'stop' });
+	});
+	socket.on('select',function(data){
+		io.emit('select',{action: 'select',user: data.user, phone: data.phone});
+	});
+	socket.on('qr', function (data) {
+		io.emit('qr', { action: 'qr'});
+	});
+	socket.on('qx',function(data){
+		io.emit('qx', {action: 'qx'});
+	});
+
 });
 
 // 定制404页面
