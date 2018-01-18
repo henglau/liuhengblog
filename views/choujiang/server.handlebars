@@ -44,7 +44,7 @@
 	<script type="text/javascript">
 		(function(){
 			//连接websocket后端服务器
-			var socket = io.connect('ws://localhost');
+			var socket = io.connect('ws://www.henglau.cn');
 
 			socket.on('select', function(data){
 				confirm(data.user + ', ' + data.phone) ? 

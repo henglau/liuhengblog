@@ -1,5 +1,5 @@
 //连接websocket后端服务器
-var socket = io.connect('ws://localhost');
+var socket = io.connect('ws://www.henglau.cn');
 
 socket.on('start', function(){
 	start();
