@@ -100,12 +100,15 @@ function bzd() {
 //确认中奖
 function qr(jpersons){
 	zjnum++;
+	var nextIndex = Math.floor($.inArray(jinfo['name'], xinm)/2);
 	//将已中奖者从数组中"删除",防止二次中奖
 	xinm.splice($.inArray(jinfo['name'], xinm), 1);
 	phone.splice($.inArray(jinfo['phone'], phone), 1);
 	// var cp = $('.conbox').find('p').removeAttr('style').clone();
 	// $('.zjmd_bt_xy').find('p').eq(0).css({'border-top':'1px solid #FF2525'});
 	// $('.zjmd_bt_xy').prepend(cp);
+	nametxt.html(xinm[nextIndex]);
+	phonetxt.html(phone[nextIndex]);
 	appendList(jpersons);
 	$('.conbox').empty();
 	$('.confirmbox').hide();
