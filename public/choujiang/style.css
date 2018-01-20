@@ -12,17 +12,19 @@ li { list-style: none; }
 .start { background: #24ADD7; cursor: initial;}
 #btntxt.start,#btntxt.stop {float: none;margin: 15px auto;}
 .stop { background: #FC6666; }
-.zjmd { float: left; width: 300px; height: 400px; background: #666; margin-top: 30px; margin-left: 30px; background: #ffffff; overflow: auto; }
-.zjmd .p1 { line-height: 40px; text-align: center; font-size: 20px; padding: 0; }
-.zjmd p { line-height: 40px; font-size: 20px; text-align: justify; padding-left: 20px; }
+.zjmd { float: left; width: 300px; height: 400px; background: #666; margin-top: 30px; margin-left: 30px; background: #ffffff;position: relative;}
+.zjmd .p1 { line-height: 40px; text-align: center; font-size: 20px; padding: 0; position: absolute;bottom: 100%;left: 0;width: 100%;}
+.zjmd p { line-height: 50px; font-size: 20px; text-align: justify; padding-left: 20px; }
 /* .zjmd p span { padding: 0 5px; } */
-.list { height: auto; overflow: auto; }
+.list { height: 100%; overflow: auto; }
 .confirmbox { width: 670px; height: auto; position: fixed; top: 100px; left: 0; right: 0; margin: auto; display: none; background: url(box_bg.jpg) repeat center; border-radius: 50px; overflow:hidden;}
 .conbox { width: 600px; height: auto; margin: auto; padding-left:50px;}
 .conbox ul li { float: left; width: 50%; height: 45px; line-height: 45px; text-align: center; font-size: 18px; font-weight: bold; }
-.conbox p { float: left; width: 50%; height: 45px; line-height: 45px; text-align: left; font-size: 24px; font-weight: bold; color: #FF2525; }
+.conbox p { float: left; width: 50%; height: 45px; line-height: 50px; text-align: left; font-size: 24px; font-weight: bold; color: #FF2525; }
 .btnbox { width: 320px; height: auto; margin: auto; }
 .new_s { width: 140px; height: 40px; line-height: 40px; font-size: 30px; margin:3px;margin: 20px 10px;}
 .lucknum { text-align: center; line-height: 40px; font-size: 28px; font-weight: bold; color: #F30606; }
 .svbtn {float: right; font-size: 24px; margin-left: 90px; height: 40px; line-height: 40px;/*  background:none;border:none; */}
 .zj_bottom, .zj_top { width: 502px; height: auto; margin: auto; }
+.conbox .jlevel {display: block;}
+.zjmd_bt_xy .jlevel {margin-right: 10px;}

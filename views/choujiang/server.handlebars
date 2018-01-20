@@ -55,8 +55,8 @@
 			$('#start').click(function(){
 				var $this = $(this);
 				if(!$this.hasClass('stop')){
-					socket.emit('start', {action: 'start'});
 					$this.text('停止抽奖').addClass('stop');
+					socket.emit('start', {action: 'start'});
 				}else{
 					$this.text('开始抽奖').removeClass('stop');
 					socket.emit('stop', {action: 'stop'});

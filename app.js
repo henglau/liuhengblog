@@ -66,25 +66,7 @@ app.use(function(req,res,next){
 	delete req.session.choujiangLoginErr;
 	next();
 });
-// var mysql = require('mysql');
-// var DATABASE = require('./libs/database.js');
 app.get('/', function(req, res){
-	// // 创建连接
-	// var connection = mysql.createConnection(DATABASE); 
-	// connection.connect();
-	// var userGetSql = 'SELECT * FROM ' + DATABASE.table;
-	// //查 query
-	// connection.query(userGetSql,function (err, result) {
-	// 	if(err){
-	// 		console.log('[SELECT ERROR] - ',err.message);
-	// 		return;
-	// 	}       
-	// 	console.log('---------------SELECT----------------');
-	// 	console.log(result);       
-	// 	console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'); 
-	// });
-	// connection.end();
-	// signed属性: 设置cookie签名
 	if(!req.cookies.isFirstCome){	//或者使用 req.cookies['isFirstCome']
 		res.cookie('isFirstCome','true',{signed:false,maxAge:86400000});
 	}else{
@@ -104,8 +86,27 @@ app.get('/downloads',function(req,res){
 app.get('/contact',function(req,res){
 	res.render('contact');
 });
+
+var mysql = require('mysql');
+var DATABASE = require('./libs/database.js');
 app.get('/choujiang',function(req,res){
-	res.render('choujiang/index',{layout: null});
+	var persons = [];
+	// 创建连接
+	var connection = mysql.createConnection(DATABASE); 
+	connection.connect();
+	var userGetSql = 'SELECT NAME,PHONE FROM ' + DATABASE.table;
+	//查 query
+	connection.query(userGetSql,function (err, result) {
+		if(err){
+			console.log('[SELECT ERROR] - ',err.message);
+			return;
+		}       
+		result.forEach(function(item){
+			persons.push({name: item.NAME, phone: item.PHONE});
+		});
+		res.render('choujiang/index',{layout: null, persons: JSON.stringify(persons)});
+	});
+	connection.end();
 });
 app.get('/choujiang/server',function(req,res){
 	if(req.session.user === 'yulu'){
