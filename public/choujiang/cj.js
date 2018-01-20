@@ -16,7 +16,7 @@ var numr = 10;//每次抽取幸运奖人数
 var t = 0;//循环调用
 var lucknum = 0;
 var luckyCount = 10;
-
+var zjnum = $('.list').find('p').length;
 var pdnum = pcount;//参加人数判断是否抽取完
 
 //连接websocket后端服务器
@@ -42,8 +42,7 @@ socket.on('qx', function(){
 
 //大奖开始停止
 function start() {
-	var zjnum = $('.list').find('p');
-	if(zjnum.length == luckyCount){
+	if(zjnum == luckyCount){
 		alert('已抽出全部奖项');
 	}else{
 		if (runing) {
@@ -81,8 +80,6 @@ function stop() {
 //打印中奖名单
 function bzd() {
 	pcount = xinm.length;
-	//获取中奖人数
-	var zjnum = $('.list').find('p').length;
 	//打印中奖者名单
 	$('.conbox').prepend("<p style='width:80%;font-size:38px;padding:5px 30px 60px;text-align: center;color:#FF2525;'><span class='jlevel'>"+getJlevel(zjnum)+"等奖</span>"+xinm[num]+"   "+phone[num]+"</p>");
 	$('.confirmbox').show();
@@ -103,6 +100,7 @@ function getJlevel(num) {
 }
 //确认中奖
 function qr(){
+	zjnum++;
 	//将已中奖者从数组中"删除",防止二次中奖
 	xinm.splice($.inArray(xinm[num], xinm), 1);
 	phone.splice($.inArray(phone[num], phone), 1);
