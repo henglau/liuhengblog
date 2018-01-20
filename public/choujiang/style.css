@@ -1,5 +1,5 @@
 * { margin: 0; padding: 0; }
-body{overflow:hidden;min-width: 800px;}
+body{overflow:hidden;min-width: 800px;background-color: #611d1a;}
 li { list-style: none; }
 .clear { clear: both; }
 .bg { width: 100%; max-width: 1920px; height: auto; position: relative; }
@@ -28,3 +28,5 @@ li { list-style: none; }
 .zj_bottom, .zj_top { width: 502px; height: auto; margin: auto; }
 .conbox .jlevel {display: block;}
 .zjmd_bt_xy .jlevel {margin-right: 10px;}
+.zjmd_bt_xy p {border-top: 1px solid rgb(255, 37, 37);}
+.zjmd_bt_xy p:first-child {border:none;}

@@ -66,14 +66,14 @@ app.use(function(req,res,next){
 	delete req.session.choujiangLoginErr;
 	next();
 });
-app.get('/', function(req, res){
-	if(!req.cookies.isFirstCome){	//或者使用 req.cookies['isFirstCome']
-		res.cookie('isFirstCome','true',{signed:false,maxAge:86400000});
-	}else{
-		console.info(req.cookies.isFirstCome);
-	}
-   	res.render('index',{t:'temp'});
-});
+// app.get('/', function(req, res){
+// 	if(!req.cookies.isFirstCome){	//或者使用 req.cookies['isFirstCome']
+// 		res.cookie('isFirstCome','true',{signed:false,maxAge:86400000});
+// 	}else{
+// 		console.info(req.cookies.isFirstCome);
+// 	}
+//    	res.render('index',{t:'temp'});
+// });
 app.get('/blogs',function(req,res){
 	res.render('blogs');
 });
@@ -87,30 +87,23 @@ app.get('/contact',function(req,res){
 	res.render('contact');
 });
 
-var mysql = require('mysql');
-var DATABASE = require('./libs/database.js');
+var execsql = require('./libs/execsql.js');
 app.get('/choujiang',function(req,res){
 	var persons = [];
-	// 创建连接
-	var connection = mysql.createConnection(DATABASE); 
-	connection.connect();
-	var userGetSql = 'SELECT NAME,PHONE FROM ' + DATABASE.table;
-	//查 query
-	connection.query(userGetSql,function (err, result) {
-		if(err){
-			console.log('[SELECT ERROR] - ',err.message);
-			return;
-		}       
-		result.forEach(function(item){
-			persons.push({name: item.NAME, phone: item.PHONE});
+	execsql('select name, phone, jlevel from persons order by jlevel', 
+		function(result){
+			result.forEach(function(item){
+				persons.push({name: item.name, phone: item.phone, jlevel: item.jlevel});
+			});
+			res.render('choujiang/index',{layout: null, persons: JSON.stringify(persons)});
 		});
-		res.render('choujiang/index',{layout: null, persons: JSON.stringify(persons)});
-	});
-	connection.end();
 });
 app.get('/choujiang/server',function(req,res){
 	if(req.session.user === 'yulu'){
-		res.render('choujiang/server',{layout: null});
+		execsql('select count(phone) count_zj from persons where jlevel<>0', 
+			function(result){
+				res.render('choujiang/server',{layout: null, jcount: result[0]['count_zj'], isFinish: (result[0]['count_zj'] >= 10 ? 'true' : '')});
+			});
 	}else{
 		res.redirect(302,'/choujiang/login');
 	}
@@ -127,6 +120,63 @@ app.post('/choujiang/postLogin', function(req, res){
 		res.redirect('/choujiang/login');
 	}
 });
+app.post('/choujiang/start', function(req, res){
+	execsql('select count(phone) count_zj from persons where jlevel<>0', 
+		function(result){
+			var count_zj = result[0]['count_zj'];
+			if(count_zj<10){
+				io.emit('start', { action: 'start' });
+				res.json({status:'start'});
+			}else{
+				res.json({status:'finish'});
+			}
+		});
+});
+app.post('/choujiang/stop', function(req, res){
+	execsql('select a.*,b.count_zj from (select name,phone from persons  where jlevel=0 order by rand() limit 1) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
+		function(result){
+			var jinfo = result[0];
+			jinfo['jlevel'] = getJlevel(jinfo['count_zj']);
+			io.emit('stop', { action: 'stop', jinfo: jinfo});
+			res.json({status:'stop',jinfo: jinfo});
+		});
+	
+});
+app.post('/choujiang/qr', function(req, res){
+	execsql('update persons set jlevel='+req.body.jlevel+' where phone="'+req.body.phone+'";'+
+			'select jlevel, name, phone from persons where jlevel<>0 order by jlevel', 
+		function(result){
+			io.emit('qr', { action: 'qr',jpersons: JSON.stringify(result[1])});
+			res.json({status:'qr'});
+		});
+});
+app.post('/choujiang/qx', function(req, res){
+	io.emit('qx', {action: 'qx'});
+	res.json({status:'qx'});
+});
+app.post('/choujiang/clear',function(req, res){
+	execsql('update persons set jlevel=0 where jlevel<>0',
+	function(result){
+		res.json({status:'clear'});
+	});
+});
+//socket.io
+io.on('connection', function(socket){
+	// console.info('a user connected...');
+});
+
+function getJlevel(count) {
+	if(count >= 9){
+		return '一';
+	}else if(count >= 7){
+		return '二';
+	}else if(count >= 4){
+		return '三';
+	}else {
+		return '四';
+	}
+}
+
 app.get('/yintai', function(req, res){
 	res.render('yintai/index', { layout:'yintai',csrf: 'CSRF token goes here' });
 });
@@ -328,26 +378,6 @@ app.use('/upload',function(req,res,next){
 	})(req,res,next);
 });
 
-
-//socket.io
-io.on('connection', function(socket){
-	socket.on('start', function (data) {
-		io.emit('start', { action: 'start' });
-	});
-	socket.on('stop', function (data) {
-		io.emit('stop', { action: 'stop' });
-	});
-	socket.on('select',function(data){
-		io.emit('select',{action: 'select',user: data.user, phone: data.phone});
-	});
-	socket.on('qr', function (data) {
-		io.emit('qr', { action: 'qr'});
-	});
-	socket.on('qx',function(data){
-		io.emit('qx', {action: 'qx'});
-	});
-
-});
 
 // 定制404页面
 app.use(function(req, res){

@@ -36,32 +36,70 @@
 </head>
 <body>
 	<div id="container">
-		<button id="start" class="btn">开始抽奖</button><br>
+		<button id="start" class="btn" {{#if isFinish}}disabled{{/if}}>开始抽奖</button><br>
 		<button id="clear" class="btn">清空中奖名单</button>
+		<p>已抽出<span class="jcount">{{jcount}}</span>个奖品</p>
 	</div>
 	<script type="text/javascript" src="/choujiang/jquery-1.8.0.js"></script>
-	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		(function(){
-			//连接websocket后端服务器
-			var socket = io.connect('ws://www.henglau.cn');
-
-			socket.on('select', function(data){
-				confirm(data.user + ', ' + data.phone) ? 
-				socket.emit('qr', {action: 'qr'}) : 
-				socket.emit('qx', {action: 'qx'});
-			});
-
+			var jcount = {{jcount}};
 			$('#start').click(function(){
 				var $this = $(this);
 				if(!$this.hasClass('stop')){
-					$this.text('停止抽奖').addClass('stop');
-					socket.emit('start', {action: 'start'});
+					$this.text('停止抽奖').addClass('stop').attr('disabled',true);
+					$.post('/choujiang/start',{action: 'start'},function(result){
+						if(result.status==='start'){
+							$this.removeAttr('disabled');
+						}
+						if(result.status==='finish'){
+							$this.attr('disabled',true);
+							alert('已经抽出全部奖品');
+						}
+					});
 				}else{
-					$this.text('开始抽奖').removeClass('stop');
-					socket.emit('stop', {action: 'stop'});
+					$this.text('开始抽奖').removeClass('stop').attr('disabled',true);
+					$.post('/choujiang/stop',{action: 'stop'},function(result){
+						if(confirm(result.jinfo.name + ', ' + result.jinfo.phone)){
+							$.post('/choujiang/qr',{action: 'qr',phone:result.jinfo.phone,jlevel: getJlevel(jcount)},function(result){
+								if(result.status==='qr'){
+									jcount++;
+									$('.jcount').text(jcount);
+									$this.removeAttr('disabled');
+								}
+							});
+						}else{
+							$.post('/choujiang/qx',{action: 'qx'},function(result){
+								$this.removeAttr('disabled');
+							});
+						}
+					});
 				}
 			});
+			$('#clear').click(function(){
+				var $this = $(this);
+				$this.attr('disabled',true);
+				$.post('/choujiang/clear',null,function(result){
+					if(result.status==='clear'){
+						jcount = 0;
+						alert('成功清除中奖名单');
+						$('#start').add($this).removeAttr('disabled');
+					}else{
+						alert('清空失败');
+					}
+				});
+			});
+			function getJlevel(count) {
+				if(count >= 9){
+					return 1;
+				}else if(count >= 7){
+					return 2;
+				}else if(count >= 4){
+					return 3;
+				}else {
+					return 4;
+				}
+			}
 		}());
 	</script>
 </body>
