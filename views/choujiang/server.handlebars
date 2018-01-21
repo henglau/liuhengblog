@@ -53,7 +53,7 @@
 							$this.removeAttr('disabled');
 						}
 						if(result.status==='finish'){
-							$this.attr('disabled',true).text('开始抽奖');
+							$this.attr('disabled',true).text('开始抽奖').removeClass('stop');
 							alert('已经抽出全部奖品');
 						}
 					});
@@ -83,7 +83,7 @@
 					if(result.status==='clear'){
 						jcount = 0;
 						alert('成功清除中奖名单');
-						$('#start').removeClass('stop').add($this).removeAttr('disabled');
+						$('#start').add($this).removeAttr('disabled');
 					}else{
 						alert('清空失败');
 					}
