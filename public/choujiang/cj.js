@@ -25,7 +25,8 @@ var luckyCount = 10;
 var zjnum = jpersons.length;
 var pdnum = pcount;//参加人数判断是否抽取完
 
-var jinfo = null;
+var jinfo = null,
+	nextinfo = null;
 
 //连接websocket后端服务器
 var socket = io.connect('ws://www.henglau.cn');
@@ -37,6 +38,7 @@ socket.on('start', function(){
 
 socket.on('stop', function(data){
 	jinfo = data.jinfo;
+	nextinfo = data.jinfo;
 	runing = false;
 	start();
 
@@ -94,20 +96,19 @@ function bzd() {
 	//打印中奖者名单
 	$('.conbox').prepend("<p style='width:80%;font-size:38px;padding:5px 30px 60px;text-align: center;color:#FF2525;'><span class='jlevel'>"+jinfo['jlevel']+"等奖</span>"+jinfo['name']+"   "+jinfo['phone']+"</p>");
 	$('.confirmbox').show();
+	nametxt.html(nextinfo.name);
+	phonetxt.html(nextinfo.phone);
 	
 	return pcount;
 }
 //确认中奖
 function qr(jpersons){
-	var nextIndex = Math.floor($.inArray(jinfo['name'], xinm)/2);
 	//将已中奖者从数组中"删除",防止二次中奖
 	xinm.splice($.inArray(jinfo['name'], xinm), 1);
 	phone.splice($.inArray(jinfo['phone'], phone), 1);
 	// var cp = $('.conbox').find('p').removeAttr('style').clone();
 	// $('.zjmd_bt_xy').find('p').eq(0).css({'border-top':'1px solid #FF2525'});
 	// $('.zjmd_bt_xy').prepend(cp);
-	nametxt.html(xinm[nextIndex]);
-	phonetxt.html(phone[nextIndex]);
 	appendList(jpersons);
 	zjnum = jpersons.length;
 	$('.conbox').empty();
