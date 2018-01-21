@@ -60,10 +60,10 @@
 				}else{
 					$this.text('开始抽奖').removeClass('stop').attr('disabled',true);
 					$.post('/choujiang/stop',{action: 'stop'},function(result){
-						if(confirm(result.jinfo.name + ', ' + result.jinfo.phone)){
+						if(confirm(result.jinfo.jlevel+'\n'+result.jinfo.name + ', ' + result.jinfo.phone)){
 							$.post('/choujiang/qr',{action: 'qr',phone:result.jinfo.phone,jlevel: getJlevel(jcount)},function(result){
 								if(result.status==='qr'){
-									jcount++;
+									jcount = result.jlength
 									$('.jcount').text(jcount);
 									$this.removeAttr('disabled');
 								}

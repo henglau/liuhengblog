@@ -147,7 +147,7 @@ app.post('/choujiang/qr', function(req, res){
 			'select jlevel, name, phone from persons where jlevel<>0 order by jlevel', 
 		function(result){
 			io.emit('qr', { action: 'qr',jpersons: JSON.stringify(result[1])});
-			res.json({status:'qr'});
+			res.json({status:'qr',jlength: result[1].length});
 		});
 });
 app.post('/choujiang/qx', function(req, res){

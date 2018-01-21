@@ -99,7 +99,6 @@ function bzd() {
 }
 //确认中奖
 function qr(jpersons){
-	zjnum++;
 	var nextIndex = Math.floor($.inArray(jinfo['name'], xinm)/2);
 	//将已中奖者从数组中"删除",防止二次中奖
 	xinm.splice($.inArray(jinfo['name'], xinm), 1);
@@ -110,6 +109,7 @@ function qr(jpersons){
 	nametxt.html(xinm[nextIndex]);
 	phonetxt.html(phone[nextIndex]);
 	appendList(jpersons);
+	zjnum = jpersons.length;
 	$('.conbox').empty();
 	$('.confirmbox').hide();
 	//中奖名单排序
