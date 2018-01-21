@@ -157,6 +157,7 @@ app.post('/choujiang/qx', function(req, res){
 app.post('/choujiang/clear',function(req, res){
 	execsql('update persons set jlevel=0 where jlevel<>0',
 	function(result){
+		io.emit('clear', {action: 'clear'});
 		res.json({status:'clear'});
 	});
 });

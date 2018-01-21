@@ -52,6 +52,10 @@ socket.on('qx', function(){
 	qx();
 });
 
+socket.on('clear', function(){
+	location.reload();
+});
+
 
 //大奖开始停止
 function start() {
