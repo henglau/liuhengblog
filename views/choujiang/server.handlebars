@@ -83,7 +83,7 @@
 					if(result.status==='clear'){
 						jcount = 0;
 						alert('成功清除中奖名单');
-						$('#start').add($this).removeAttr('disabled');
+						$('#start').removeClass('stop').add($this).removeAttr('disabled');
 					}else{
 						alert('清空失败');
 					}
