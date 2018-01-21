@@ -144,7 +144,7 @@ app.post('/choujiang/stop', function(req, res){
 });
 app.post('/choujiang/qr', function(req, res){
 	execsql('update persons set jlevel='+req.body.jlevel+' where phone="'+req.body.phone+'";'+
-			'select jlevel, name, phone from persons where jlevel<>0 order by jlevel', 
+			'select jlevel, name, phone from persons where jlevel<>0 order by jlevel,jtime desc', 
 		function(result){
 			io.emit('qr', { action: 'qr',jpersons: JSON.stringify(result[1])});
 			res.json({status:'qr',jlength: result[1].length});
