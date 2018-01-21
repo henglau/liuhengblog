@@ -136,7 +136,7 @@ app.post('/choujiang/stop', function(req, res){
 	execsql('select a.*,b.count_zj from (select name,phone from persons  where jlevel=0 order by rand() limit 1) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
 		function(result){
 			var jinfo = result[0];
-			jinfo['jlevel'] = getJlevel(jinfo['count_zj']);
+			jinfo['jlevel'] = getJlevel(jinfo['count_zj'])+'等奖';
 			io.emit('stop', { action: 'stop', jinfo: jinfo});
 			res.json({status:'stop',jinfo: jinfo});
 		});
