@@ -133,21 +133,21 @@ app.post('/choujiang/start', function(req, res){
 		});
 });
 app.post('/choujiang/stop', function(req, res){
-	execsql('select a.*,b.count_zj from (select name,phone from persons  where jlevel=0 order by rand() limit 2) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
+	execsql('select a.*,b.count_zj from (select name,phone from persons  where jlevel=0 order by rand() limit 1) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
 		function(result){
 			var jinfo = result[0];
-			jinfo['jlevel'] = getJlevel(jinfo['count_zj'])+'等奖';
-			io.emit('stop', { action: 'stop', jinfo: jinfo, nextinfo: result[1]});
+			jinfo['jlevel'] = getJlevel(jinfo['count_zj']);
+			io.emit('stop', { action: 'stop', jinfo: jinfo});
 			res.json({status:'stop',jinfo: jinfo});
 		});
 	
 });
 app.post('/choujiang/qr', function(req, res){
 	execsql('update persons set jlevel='+req.body.jlevel+' where phone="'+req.body.phone+'";'+
-			'select jlevel, name, phone from persons where jlevel<>0 order by jlevel,jtime desc', 
+			'select a.jlevel, a.name, a.phone, b.count_zj from (select jlevel, name, phone from persons where jlevel='+req.body.jlevel+' order by jlevel,jtime desc) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
 		function(result){
 			io.emit('qr', { action: 'qr',jpersons: JSON.stringify(result[1])});
-			res.json({status:'qr',jlength: result[1].length});
+			res.json({status:'qr',jlength: result[1][0]['count_zj']});
 		});
 });
 app.post('/choujiang/qx', function(req, res){
@@ -168,13 +168,13 @@ io.on('connection', function(socket){
 
 function getJlevel(count) {
 	if(count >= 9){
-		return '一';
+		return '一等奖';
 	}else if(count >= 7){
-		return '二';
+		return '二等奖';
 	}else if(count >= 4){
-		return '三';
+		return '三等奖';
 	}else {
-		return '四';
+		return '四等奖';
 	}
 }
 

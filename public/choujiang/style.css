@@ -13,7 +13,8 @@ li { list-style: none; }
 #btntxt.start,#btntxt.stop {float: none;margin: 15px auto;}
 .stop { background: #FC6666; }
 .zjmd { float: left; width: 300px; height: 400px; background: #666; margin-top: 30px; margin-left: 30px; background: #ffffff;position: relative;}
-.zjmd .p1 { line-height: 40px; text-align: center; font-size: 20px; padding: 0; position: absolute;bottom: 100%;left: 0;width: 100%;}
+.zjmd .p1 { line-height: 40px; text-align: center; font-size: 20px; color:gold;padding: 0; position: absolute;bottom: 100%;left: 0;width: 100%;}
+.jlevel-info {font-weight: bold;margin-right: 10px;}
 .zjmd p { line-height: 50px; font-size: 20px; text-align: justify; padding-left: 20px; }
 /* .zjmd p span { padding: 0 5px; } */
 .list { height: 100%; overflow: auto; }
