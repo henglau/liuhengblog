@@ -83,6 +83,7 @@
 				$.post('/choujiang/clear',null,function(result){
 					if(result.status==='clear'){
 						jcount = 0;
+						$('.jcount').text(jcount);
 						alert('成功清除中奖名单');
 						$('#start').add($this).removeAttr('disabled');
 					}else{
