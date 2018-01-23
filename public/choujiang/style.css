@@ -19,15 +19,17 @@ li { list-style: none; }
 /* .zjmd p span { padding: 0 5px; } */
 .list { height: 100%; overflow: auto; }
 .confirmbox { width: 670px; height: auto; position: fixed; top: 100px; left: 0; right: 0; margin: auto; display: none; background: url(box_bg.jpg) repeat center; border-radius: 50px; overflow:hidden;}
-.conbox { width: 600px; height: auto; margin: auto; padding-left:50px;}
+.conbox { width: 600px; height: auto; margin: auto;}
 .conbox ul li { float: left; width: 50%; height: 45px; line-height: 45px; text-align: center; font-size: 18px; font-weight: bold; }
-.conbox p { float: left; width: 50%; height: 45px; line-height: 50px; text-align: left; font-size: 24px; font-weight: bold; color: #FF2525; }
+.conbox p { line-height: 40px; text-align: left; font-size: 24px; font-weight: bold; color: #FF2525; }
+.conbox p:after{content:'';display: table;clear: both;}
+.conbox label{display:block; float:left;width: 50%;height: 40px;line-height: 40px;text-align:center;font-size: 25px;}
 .btnbox { width: 320px; height: auto; margin: auto; }
 .new_s { width: 140px; height: 40px; line-height: 40px; font-size: 30px; margin:3px;margin: 20px 10px;}
 .lucknum { text-align: center; line-height: 40px; font-size: 28px; font-weight: bold; color: #F30606; }
 .svbtn {float: right; font-size: 24px; margin-left: 90px; height: 40px; line-height: 40px;/*  background:none;border:none; */}
 .zj_bottom, .zj_top { width: 502px; height: auto; margin: auto; }
-.conbox .jlevel {display: block;}
+.conbox .jlevel {display: block;margin-bottom: 10px;}
 .zjmd_bt_xy .jlevel {margin-right: 10px;}
 .zjmd_bt_xy p {border-top: 1px solid rgb(255, 37, 37);}
 .zjmd_bt_xy p:first-child {border:none;}

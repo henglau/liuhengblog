@@ -43,7 +43,6 @@
 	<script type="text/javascript" src="/choujiang/jquery-1.8.0.js"></script>
 	<script type="text/javascript">
 		(function(){
-			var jname = ['一等奖','二等奖','三等奖','四等奖'];
 			var jcount = {{jcount}};
 			$('#start').click(function(){
 				var $this = $(this);
@@ -61,10 +60,14 @@
 				}else{
 					$this.text('开始抽奖').removeClass('stop').attr('disabled',true);
 					$.post('/choujiang/stop',{action: 'stop'},function(result){
-						if(confirm(result.jinfo.jlevel+'\n'+result.jinfo.name + ', ' + result.jinfo.phone)){
-							$.post('/choujiang/qr',{action: 'qr',phone:result.jinfo.phone,jlevel: parseInt(jname.indexOf(result.jinfo.jlevel))+1},function(result){
+						var jinfo = result.jinfo;
+						var jinfoStr = jinfo[0].jlevel + jinfo.map(function(item){
+												return '\n'+item.name+' , '+item.phone;
+											}).join('');
+						if(confirm(jinfoStr)){
+							$.post('/choujiang/qr',{action: 'qr', jinfo: JSON.stringify(jinfo)},function(result){
 								if(result.status==='qr'){
-									jcount = result.jlength
+									jcount = result.jlength;
 									$('.jcount').text(jcount);
 									$this.removeAttr('disabled');
 								}

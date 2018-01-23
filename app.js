@@ -88,25 +88,18 @@ app.get('/contact',function(req,res){
 });
 
 var execsql = require('./libs/execsql.js');
+
+var jname = ['一等奖','二等奖','三等奖','四等奖','幸运奖'];
+var jcount = 0;
 app.get('/choujiang',function(req,res){
 	var persons = [];
-	execsql('select name, phone, jlevel from persons order by jlevel', 
+	execsql('select name, phone, jlevel from persons order by jlevel,jtime desc', 
 		function(result){
 			result.forEach(function(item){
 				persons.push({name: item.name, phone: item.phone, jlevel: item.jlevel});
 			});
 			res.render('choujiang/index',{layout: null, persons: JSON.stringify(persons)});
 		});
-});
-app.get('/choujiang/server',function(req,res){
-	if(req.session.user === 'yulu'){
-		execsql('select count(phone) count_zj from persons where jlevel<>0', 
-			function(result){
-				res.render('choujiang/server',{layout: null, jcount: result[0]['count_zj'], isFinish: (result[0]['count_zj'] >= 10 ? 'true' : '')});
-			});
-	}else{
-		res.redirect(302,'/choujiang/login');
-	}
 });
 app.get('/choujiang/login',function(req,res){
 	res.render('choujiang/login',{layout: null});
@@ -120,34 +113,51 @@ app.post('/choujiang/postLogin', function(req, res){
 		res.redirect('/choujiang/login');
 	}
 });
+app.get('/choujiang/server',function(req,res){
+	if(req.session.user === 'yulu'){
+		execsql('select count(phone) count_zj from persons where jlevel<>0', 
+			function(result){
+				jcount = result[0]['count_zj'];
+				res.render('choujiang/server',{layout: null, jcount: jcount, isFinish: (jcount >= 30 ? 'true' : '')});
+			});
+	}else{
+		res.redirect(302,'/choujiang/login');
+	}
+});
 app.post('/choujiang/start', function(req, res){
-	execsql('select count(phone) count_zj from persons where jlevel<>0', 
-		function(result){
-			var count_zj = result[0]['count_zj'];
-			if(count_zj<10){
-				io.emit('start', { action: 'start' });
-				res.json({status:'start'});
-			}else{
-				res.json({status:'finish'});
-			}
-		});
+	if(jcount<30){
+		io.emit('start', { action: 'start' });
+		res.json({status:'start'});
+	}else{
+		res.json({status:'finish'});
+	}
 });
 app.post('/choujiang/stop', function(req, res){
-	execsql('select a.*,b.count_zj from (select name,phone from persons  where jlevel=0 order by rand() limit 1) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
-		function(result){
-			var jinfo = result[0];
-			jinfo['jlevel'] = getJlevel(jinfo['count_zj']);
-			io.emit('stop', { action: 'stop', jinfo: jinfo});
-			res.json({status:'stop',jinfo: jinfo});
-		});
+	if(jcount <= 30){
+		execsql('select name, phone from persons where jlevel=0 order by rand() limit '+(jcount<20 ? 10 : 1),
+			function(result){
+				var jinfo = result;
+				var jlevel = getJlevel(jcount);
+				jinfo.forEach(function(item){
+					item['jlevel'] = jlevel;
+				});
+				io.emit('stop', { action: 'stop', jinfo: jinfo});
+				res.json({status:'stop',jinfo: jinfo});
+			});
+	}else {
+		res.json({status:'stop'});
+	}
 	
 });
 app.post('/choujiang/qr', function(req, res){
-	execsql('update persons set jlevel='+req.body.jlevel+' where phone="'+req.body.phone+'";'+
-			'select a.jlevel, a.name, a.phone, b.count_zj from (select jlevel, name, phone from persons where jlevel='+req.body.jlevel+' order by jlevel,jtime desc) a, (select count(phone) count_zj from persons where jlevel<>0) b;', 
+	var jinfo = JSON.parse(req.body.jinfo);
+	var jlevel = parseInt(jname.indexOf(jinfo[0]['jlevel']))+1;
+	execsql('update persons set jlevel='+jlevel+' where phone in ('+jinfo.map(function(item){return '"'+item['phone']+'"';}).join(',')+');'+
+			'select jlevel, name, phone, count_zj from (select a.jlevel, a.name, a.phone, a.jtime, b.count_zj from (select jlevel, name, phone, jtime from persons where jlevel='+jlevel+' order by jlevel) a,(select count(phone) count_zj from persons where jlevel<>0) b) c order by jtime desc;', 
 		function(result){
+			jcount = result[1][0]['count_zj'];
 			io.emit('qr', { action: 'qr',jpersons: JSON.stringify(result[1])});
-			res.json({status:'qr',jlength: result[1][0]['count_zj']});
+			res.json({status:'qr',jlength: jcount});
 		});
 });
 app.post('/choujiang/qx', function(req, res){
@@ -157,6 +167,7 @@ app.post('/choujiang/qx', function(req, res){
 app.post('/choujiang/clear',function(req, res){
 	execsql('update persons set jlevel=0 where jlevel<>0',
 	function(result){
+		jcount = 0;
 		io.emit('clear', {action: 'clear'});
 		res.json({status:'clear'});
 	});
@@ -167,14 +178,16 @@ io.on('connection', function(socket){
 });
 
 function getJlevel(count) {
-	if(count >= 9){
-		return '一等奖';
-	}else if(count >= 7){
-		return '二等奖';
-	}else if(count >= 4){
-		return '三等奖';
+	if(count >= 29){
+		return jname[0];
+	}else if(count >= 27){
+		return jname[1];
+	}else if(count >= 24){
+		return jname[2];
+	}else if(count >= 20){
+		return jname[3];
 	}else {
-		return '四等奖';
+		return jname[4];
 	}
 }
 

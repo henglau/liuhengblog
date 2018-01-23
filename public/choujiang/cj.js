@@ -1,7 +1,7 @@
 var xinm = new Array();
 var phone = new Array();
 var jpersons = new Array();
-var jname = ['一等奖','二等奖','三等奖','四等奖'];
+var jname = ['一等奖','二等奖','三等奖','四等奖','幸运奖'];
 
 persons.forEach(function(item){
 	if(item['jlevel']>0){
@@ -94,18 +94,28 @@ function stop() {
 function bzd() {
 	pcount = xinm.length;
 	//打印中奖者名单
-	$('.conbox').prepend("<p style='width:80%;font-size:38px;padding:5px 30px 60px;text-align: center;color:#FF2525;'><span class='jlevel'>"+jinfo['jlevel']+"</span>"+jinfo['name']+"   "+jinfo['phone']+"</p>");
+	if(jinfo.length > 1){
+		$('.conbox').prepend("<p style='font-size:38px;padding:5px 0 0;text-align: center;color:#FF2525;'><span class='jlevel'>"+jinfo[0]['jlevel']+"</span>"+
+				jinfo.map(function(item){
+					return '<label>'+item['name']+'  '+item['phone']+'</label>';
+				}).join('')+
+			"</p>");
+	}else{
+		$('.conbox').prepend("<p style='font-size:38px;padding:5px 30px 60px;text-align: center;color:#FF2525;'><span class='jlevel'>"+jinfo[0]['jlevel']+"</span>"+jinfo[0]['name']+"   "+jinfo[0]['phone']+"</p>");
+	}
 	$('.confirmbox').show();
-	nametxt.html(jinfo.name);
-	phonetxt.html(jinfo.phone);
+	nametxt.html(jinfo[0].name);
+	phonetxt.html(jinfo[0].phone);
 	
 	return pcount;
 }
 //确认中奖
 function qr(jpersons){
 	//将已中奖者从数组中"删除",防止二次中奖
-	xinm.splice($.inArray(jinfo['name'], xinm), 1);
-	phone.splice($.inArray(jinfo['phone'], phone), 1);
+	jpersons.forEach(function(item){
+		xinm.splice($.inArray(item['name'], xinm), 1);
+		phone.splice($.inArray(item['phone'], phone), 1);
+	});
 	$('.jlevel-info').text(jname[jpersons[0].jlevel-1]);
 	appendList(jpersons);
 	$('.conbox').empty();
@@ -122,14 +132,16 @@ function appendList(arr){
 	}).join(''));
 }
 function getJlevel(count) {
-	if(count >= 9){
+	if(count >= 29){
 		return jname[0];
-	}else if(count >= 7){
+	}else if(count >= 27){
 		return jname[1];
-	}else if(count >= 4){
+	}else if(count >= 24){
 		return jname[2];
-	}else {
+	}else if(count >=20){
 		return jname[3];
+	}else{
+		return jname[4];
 	}
 }
 
