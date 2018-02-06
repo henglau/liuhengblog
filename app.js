@@ -66,14 +66,14 @@ app.use(function(req,res,next){
 	delete req.session.choujiangLoginErr;
 	next();
 });
-// app.get('/', function(req, res){
-// 	if(!req.cookies.isFirstCome){	//或者使用 req.cookies['isFirstCome']
-// 		res.cookie('isFirstCome','true',{signed:false,maxAge:86400000});
-// 	}else{
-// 		console.info(req.cookies.isFirstCome);
-// 	}
-//    	res.render('index',{t:'temp'});
-// });
+app.get('/', function(req, res){
+	if(!req.cookies.isFirstCome){	//或者使用 req.cookies['isFirstCome']
+		res.cookie('isFirstCome','true',{signed:false,maxAge:86400000});
+	}else{
+		// console.info(req.cookies.isFirstCome);
+	}
+   	res.render('index',{t:'temp'});
+});
 app.get('/blogs',function(req,res){
 	res.render('blogs');
 });
